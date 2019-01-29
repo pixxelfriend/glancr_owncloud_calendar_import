@@ -31,9 +31,12 @@ $base_url =  "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_imp
 		<input type="password" class="oc_calendar_change" name="oc_calendar_password" placeholder="Passwort" value="">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_url" placeholder="url<?php echo _('oc_importer_url');?>" value=""/>
 	</div>
-	<div class="block__add" id="oc_calendar_import__edit">
-		<button class="oc_calendar_import__edit--button" href="#">
+	<div id="oc_calendar_import__edit">
+		<button class="button oc_calendar_import__edit">
 			<span><?php echo _('save'); ?></span>
+    </button>
+    <button type="reset" class="button oc_calendar_import__reset">
+			<span><?php echo _('abort'); ?></span>
 		</button>
 	</div>
 </form>

@@ -12,11 +12,19 @@ $(document).ready(function(){
 	$('.oc_calendar_import__add').click(function() {
 		resetForm()
 		form.show()
-			.find("h4.edit")
-			.addClass('hidden')
+			.find("h4.add")
+			.removeClass('hidden')
 		$('.oc_calendar_list').hide()
 	});
 
+	$('.oc_calendar_import__reset').click(function() {
+    resetForm()
+    if(oc_calendar_settings.calendars.length > 0){
+      form.hide()
+      $('.oc_calendar_list').show()
+    }
+	})
+  
 
 	form.on('submit',event => {
 		event.preventDefault()
@@ -47,17 +55,19 @@ function buildList(){
 	//append to list
 	$('#oc_calendar_list').html(list.trim());
 	$('#oc_calendar_list button.oc_calendar__edit').on('click',function(){
-		form.find("h4").removeClass('hidden')
-		form.find("h4.add").addClass('hidden')
+    resetForm()
+    
+    const form = $('#oc_calendar_import')
 		const i = $(this).data('index')
-		const form = $('#oc_calendar_import')
-		const item = {...oc_calendar_settings.calendars[i]}
+    const item = {...oc_calendar_settings.calendars[i]}
+		form.find("h4.edit").removeClass('hidden')
 		form.data('index',i);
 		form.find('input[name="oc_calendar_name"]').val(item.oc_calendar_name)
 		form.find('input[name="oc_calendar_user"]').val(item.oc_calendar_user)
 		form.find('input[name="oc_calendar_password"]').val(item.oc_calendar_password)
 		form.find('input[name="oc_calendar_url"]').val(item.oc_calendar_url)
-		form.show()
+    form.show()
+    $('.oc_calendar_list').hide()
 	})
 
 	$('#oc_calendar_list .oc_calendar__delete').on('click',function() {
@@ -90,7 +100,7 @@ function submitFormular(){
 
 function resetForm(){
 	const form = $('#oc_calendar_import')
-	form.find("h4").removeClass('hidden')
+	form.find('h4').addClass('hidden')
 	form.data('index',-1)
 	form.find('input').val('')
 }
