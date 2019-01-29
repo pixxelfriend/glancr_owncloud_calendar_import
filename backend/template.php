@@ -14,22 +14,22 @@ $base_url =  "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_imp
 		baseUrl : "<?php echo "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_import/assets/getCalendar.php?name="; ?>"
 	}
 </script>
-
-<ul class="oc_calendar_list"></ul>
-ADD NEW CALENDAR
+<p>add a new calendar <a class="oc_calendar_import__add">here</a></p>
+<ul id="oc_calendar_list"></ul>
 
 <form id="oc_calendar_import">
-
+	<h4 class="add">ADD NEW CALENDAR</h4>
+	<h4 class="edit hidden">EDIT CALENDAR</h4>
 	<div class="oc_calendar_group">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_name" placeholder="Bezeichnung" value="">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_user" placeholder="Username" value="">
 		<input type="password" class="oc_calendar_change" name="oc_calendar_password" placeholder="Passwort" value="">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_url" placeholder="url<?php echo _('oc_importer_url');?>" value=""/>
 	</div>
-
+	<div class="block__add" id="oc_calendar_import__edit">
+		<button class="oc_calendar_import__edit--button" href="#">
+			<span><?php echo _('save'); ?></span>
+		</button>
+	</div>
 </form>
-<div class="block__add" id="oc_calendar_import__edit">
-	<button class="oc_calendar_import__edit--button" href="#">
-		<span><?php echo _('save'); ?></span>
-	</button>
-</div>
+

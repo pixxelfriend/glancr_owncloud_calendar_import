@@ -1,21 +1,36 @@
 $(document).ready(function(){
 	buildList();
-	//submit the formular
-	$('#oc_calendar_import__edit').click(function() {
-		const form = $('form#oc_calendar_import');
+	const form = $('form#oc_calendar_import');
+
+	if(oc_calendar_settings.calendars.length > 0){
+		$("#oc_calendar_import").hide();
+	}
+
+	//show the formular
+	$('.oc_calendar_import__add').click(function() {
+		resetForm()
+		form.show()
+			.find("h4.edit")
+			.addClass('hidden')
+		$('#oc_calendar_list').hide()
+	});
+
+
+	form.on('submit',event => {
+		event.preventDefault()
 		const data = formCollect(form)
 		const index = form.data('index') > -1 ? form.data('index') : oc_calendar_settings.calendars.length;
-
 		oc_calendar_settings.calendars[index] = data;
-		//var arrData = Array(formCollect($('form#oc_calendar_import')));
 		submitFormular()
-	});
+		form.hide();
+	})
+
 })
 
 
 
 function buildList(){
-	$('ul.oc_calendar_list button.oc_calendar__edit').off('click');
+	$('#oc_calendar_list button.oc_calendar__edit').off('click');
 	//Init the calendars
 	var list = oc_calendar_settings.calendars.map((calendar,index) => {
 		return `<li>
@@ -30,8 +45,10 @@ function buildList(){
 				</li>`
 	}).join('');
 	//append to list
-	$('ul.oc_calendar_list').html(list.trim());
-	$('ul.oc_calendar_list button.oc_calendar__edit').on('click',function(){
+	$('#oc_calendar_list').html(list.trim());
+	$('#oc_calendar_list button.oc_calendar__edit').on('click',function(){
+		form.find("h4").removeClass('hidden')
+		form.find("h4.add").addClass('hidden')
 		const i = $(this).data('index')
 		const form = $('#oc_calendar_import')
 		const item = {...oc_calendar_settings.calendars[i]}
@@ -40,9 +57,10 @@ function buildList(){
 		form.find('input[name="oc_calendar_user"]').val(item.oc_calendar_user)
 		form.find('input[name="oc_calendar_password"]').val(item.oc_calendar_password)
 		form.find('input[name="oc_calendar_url"]').val(item.oc_calendar_url)
+		form.show()
 	})
 
-	$('ul.oc_calendar_list .oc_calendar__delete').on('click',function() {
+	$('#oc_calendar_list .oc_calendar__delete').on('click',function() {
 		const parent = $(this).parent()
 		const index = parent.data('index')
 		oc_calendar_settings.calendars.splice(index-1,1);
@@ -52,6 +70,7 @@ function buildList(){
 								buildList()
 						})
 	})
+	$('#oc_calendar_list').show();
 }
 
 
@@ -66,12 +85,14 @@ function submitFormular(){
 			$(this).hide('slow');
 		})
 	})
+	
 }
 
 function resetForm(){
 	const form = $('#oc_calendar_import')
-	form.data('index',null);
-	form.find('input.oc_calendar_change').val('')
+	form.find("h4").removeClass('hidden')
+	form.data('index',-1)
+	form.find('input').val('')
 }
 
 

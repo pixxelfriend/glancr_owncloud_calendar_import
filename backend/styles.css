@@ -10,14 +10,16 @@
 
 .oc_calendar_export {clear:both;}
 
-ul.oc_calendar_list {
+ul#oc_calendar_list {
 	list-style: none;
 	margin:0;
 	padding:0;
 }
-ul.oc_calendar_list li {
+ul#oc_calendar_list li {
 	border:1px solid #ddd; 
 	padding: 4px;
 	margin: 0 0 10px 0;
 }
-ul.oc_calendar_list li b {display:block;}
+ul#oc_calendar_list li b {display:block;}
+
+#oc_calendar_import .hidden {display:none;}
