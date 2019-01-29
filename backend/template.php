@@ -23,7 +23,7 @@ ADD NEW CALENDAR
 	<div class="oc_calendar_group">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_name" placeholder="Bezeichnung" value="">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_user" placeholder="Username" value="">
-		<input type="text" class="oc_calendar_change" name="oc_calendar_password" placeholder="Passwort" value="">
+		<input type="password" class="oc_calendar_change" name="oc_calendar_password" placeholder="Passwort" value="">
 		<input type="text" class="oc_calendar_change" name="oc_calendar_url" placeholder="url<?php echo _('oc_importer_url');?>" value=""/>
 	</div>
 
