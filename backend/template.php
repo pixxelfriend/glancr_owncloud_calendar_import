@@ -1,3 +1,4 @@
+
 <?php 
 //$oc_calendar_url = getConfigValue('oc_calendar_url');
 #$oc_calendar_name = getConfigValue('oc_calendar_name');
@@ -14,8 +15,12 @@ $base_url =  "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_imp
 		baseUrl : "<?php echo "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_import/assets/getCalendar.php?name="; ?>"
 	}
 </script>
-<p>add a new calendar <a class="oc_calendar_import__add">here</a></p>
-<ul id="oc_calendar_list"></ul>
+<div class="oc_calendar_list">
+  <p>add a new calendar <a class="oc_calendar_import__add">here</a></p>
+  <ul id="oc_calendar_list"></ul>
+</div>
+
+
 
 <form id="oc_calendar_import">
 	<h4 class="add">ADD NEW CALENDAR</h4>
@@ -32,4 +37,3 @@ $base_url =  "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_imp
 		</button>
 	</div>
 </form>
-

@@ -4,7 +4,9 @@ $(document).ready(function(){
 
 	if(oc_calendar_settings.calendars.length > 0){
 		$("#oc_calendar_import").hide();
-	}
+	} else {
+    $(".oc_calendar_list").hide();
+  }
 
 	//show the formular
 	$('.oc_calendar_import__add').click(function() {
@@ -12,7 +14,7 @@ $(document).ready(function(){
 		form.show()
 			.find("h4.edit")
 			.addClass('hidden')
-		$('#oc_calendar_list').hide()
+		$('.oc_calendar_list').hide()
 	});
 
 
@@ -26,8 +28,6 @@ $(document).ready(function(){
 	})
 
 })
-
-
 
 function buildList(){
 	$('#oc_calendar_list button.oc_calendar__edit').off('click');
@@ -70,7 +70,7 @@ function buildList(){
 								buildList()
 						})
 	})
-	$('#oc_calendar_list').show();
+	$('.oc_calendar_list').show();
 }
 
 
