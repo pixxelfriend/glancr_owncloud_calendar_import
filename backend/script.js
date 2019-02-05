@@ -2,7 +2,7 @@ $(document).ready(function(){
 	buildList();
 	const form = $('form#oc_calendar_import');
 
-	if(oc_calendar_settings.calendars.length > 0){
+  if(oc_calendar_settings.calendars.length > 0){
 		$("#oc_calendar_import").hide();
 	} else {
     $(".oc_calendar_list").hide();
@@ -24,45 +24,47 @@ $(document).ready(function(){
       $('.oc_calendar_list').show()
     }
 	})
-  
 
 	form.on('submit',event => {
 		event.preventDefault()
     const data = formCollect(form)
-    if(data.key === "") data.key = data.name + "_" + Math.random().toString(36).replace('0.', '').substring(0,5)
-		const index = form.data('index') > -1 ? form.data('index') : oc_calendar_settings.calendars.length;
+    if(data.key === "") data.key = encodeURI(data.name + "_" + Math.random().toString(36).replace('0.', '').substring(0,5))
+    let index = oc_calendar_settings.calendars.findIndex(cal => cal.key === data.key)
+    index = (index > -1 ) ? index : oc_calendar_settings.calendars.length;
 		oc_calendar_settings.calendars[index] = data;
 		submitFormular()
 		form.hide();
 	})
-
 })
 
 function buildList(){
 	$('#oc_calendar_list button.oc_calendar__edit').off('click');
 	//Init the calendars
-	var list = oc_calendar_settings.calendars.map((calendar,index) => {
+	var list = oc_calendar_settings.calendars.map((calendar) => {
 		return `<li>
 					<b>${calendar.name} &#128472; ${calendar.interval}h</b>
 					<span>${oc_calendar_settings.baseUrl}${calendar.key}</span>
-					<button class="oc_calendar__edit" data-index="${index}" type="button">
+					<button class="oc_calendar__edit" data-key="${calendar.key}" type="button">
 						<span class="fi-pencil"></span>
 					</button>
-					<button class="oc_calendar__delete" data-index="${index}" type="button">
+					<button class="oc_calendar__delete" data-key="${calendar.key}" type="button">
 						<span class="fi-trash"></span>
 					</button>
 				</li>`
-	}).join('');
+  }).join('');
+  
 	//append to list
-	$('#oc_calendar_list').html(list.trim());
+  $('#oc_calendar_list').html(list.trim());
+  
 	$('#oc_calendar_list button.oc_calendar__edit').on('click',function(){
     resetForm()
     
     const form = $('#oc_calendar_import')
-		const i = $(this).data('index')
-    const item = {...oc_calendar_settings.calendars[i]}
+    const key = $(this).data('key')
+    const item = oc_calendar_settings.calendars.filter(e => e.key === key)[0]
+    
 		form.find("h4.edit").removeClass('hidden')
-    form.data('index',i);
+    form.data('key',key);
     form.find('input[name="key"]').val(item.key)
 		form.find('input[name="name"]').val(item.name)
 		form.find('input[name="user"]').val(item.user)
@@ -75,15 +77,25 @@ function buildList(){
 
 	$('#oc_calendar_list .oc_calendar__delete').on('click',function() {
 		const parent = $(this).parent()
-		const index = parent.data('index')
-		oc_calendar_settings.calendars.splice(index-1,1);
-		parent.fadeOut(500,function(){
-								submitFormular()
-								parent.remove()
-								buildList()
-						})
-	})
-	$('.oc_calendar_list').show();
+    const key = $(this).data('key')
+    console.log(key);
+    //ajax call to delete calendar
+   console.log(oc_calendar_settings.calendars.filter(e => e.key === key));
+   $.post('../modules/owncloud_calendar_import/assets/updateCalendars.php', {
+      'method' : 'delete',
+      'key' : oc_calendar_settings.calendars.filter(e => e.key === key)[0].key})
+    .done(function() {
+      oc_calendar_settings.calendars = oc_calendar_settings.calendars.filter(cal => cal.key !== key)
+      parent.fadeOut(500,function(){
+                  submitFormular()
+                  parent.remove()
+                  buildList()
+              })
+    })
+  })
+
+
+  $('.oc_calendar_list').show();
 }
 
 
@@ -106,7 +118,7 @@ function submitFormular(){
 function resetForm(){
 	const form = $('#oc_calendar_import')
 	form.find('h4').addClass('hidden')
-	form.data('index',-1)
+	form.data('key','')
   form.find('input').val('')
   form.find('select').val('')
 }
