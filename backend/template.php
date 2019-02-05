@@ -21,10 +21,10 @@
   <h4 class="add">ADD NEW CALENDAR</h4>
   <h4 class="edit hidden">EDIT CALENDAR</h4>
   <div class="oc_calendar_group">
-    <input type="text" class="oc_calendar_change" name="oc_calendar_name" placeholder="Bezeichnung" required />
-    <input type="text" class="oc_calendar_change" name="oc_calendar_user" placeholder="Username" required />
-    <input type="password" class="oc_calendar_change" name="oc_calendar_password" placeholder="Passwort" required />
-    <input type="url" class="oc_calendar_change" name="oc_calendar_url" placeholder="https://example.com/remote.php/dav/calendars/username/CalendarName?export" required />
+    <input type="text" name="name" class="oc_calendar_change" placeholder="Bezeichnung" required />
+    <input type="text" name="user" class="oc_calendar_change"  placeholder="Username" required />
+    <input type="password" name="password" class="oc_calendar_change"  placeholder="Passwort" required />
+    <input type="url" name="url" class="oc_calendar_change"  placeholder="https://example.com/remote.php/dav/calendars/username/CalendarName?export" required />
   </div>
   <div id="oc_calendar_import__edit">
     <button class="button oc_calendar_import__edit">

@@ -42,8 +42,8 @@ function buildList(){
 	//Init the calendars
 	var list = oc_calendar_settings.calendars.map((calendar,index) => {
 		return `<li>
-					<b>${calendar.oc_calendar_name}</b>
-					<span>${oc_calendar_settings.baseUrl}${encodeURIComponent(calendar.oc_calendar_name)}</span>
+					<b>${calendar.name}</b>
+					<span>${oc_calendar_settings.baseUrl}${encodeURIComponent(calendar.name)}</span>
 					<button class="oc_calendar__edit" data-index="${index}" type="button">
 						<span class="fi-pencil"></span>
 					</button>
@@ -62,10 +62,10 @@ function buildList(){
     const item = {...oc_calendar_settings.calendars[i]}
 		form.find("h4.edit").removeClass('hidden')
 		form.data('index',i);
-		form.find('input[name="oc_calendar_name"]').val(item.oc_calendar_name)
-		form.find('input[name="oc_calendar_user"]').val(item.oc_calendar_user)
-		form.find('input[name="oc_calendar_password"]').val(item.oc_calendar_password)
-		form.find('input[name="oc_calendar_url"]').val(item.oc_calendar_url)
+		form.find('input[name="name"]').val(item.name)
+		form.find('input[name="user"]').val(item.user)
+		form.find('input[name="password"]').val(item.password)
+		form.find('input[name="url"]').val(item.url)
     form.show()
     $('.oc_calendar_list').hide()
 	})
