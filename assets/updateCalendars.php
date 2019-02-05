@@ -2,8 +2,8 @@
 
 include('../../../config/glancrConfig.php');
 
-print_r($_GET);
 $oc_calendars = getConfigValue('oc_calendars');
+$oc_folder = '../tmp/';
 
 //print_r($oc_calendars);
 if($oc_calendars){
@@ -25,7 +25,7 @@ if($oc_calendars){
 			}
 			curl_close ($ch);
 
-			$cal_file = fopen(urlencode($calendar->oc_calendar_name).".cal", "w");
+			$cal_file = fopen($oc_folder . urlencode($calendar->oc_calendar_name).".cal", "w");
 			fwrite($cal_file, $result);
 			fclose($cal_file);
 		}
