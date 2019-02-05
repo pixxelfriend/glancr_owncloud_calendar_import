@@ -94,7 +94,9 @@ function submitFormular(){
 		buildList();
 		$('#ok').show(30, function() {
 			$(this).hide('slow');
-		})
+    })
+    //reload frontend
+    reloadMirror();
 	})
 	
 }
