@@ -1,17 +1,25 @@
 function fetch_calendars() {
-	$.ajax({
-	   dataType: 'json',
-	   url: '../modules/owncloud_calendar_import/assets/updateCalendars.php',
-	   success: function(data) {
-		   if(data.name) $('#oc_calendars').html('<b>Aktiver Kalender: ' + data.name +'</b>')
-	   }
-	});
-/*
-	// alle 5 Sekunden aktualiseren
-	window.setTimeout(function() {
-		getDummyParameter()
-	}, 5000);
-*/	
+  $.ajax({
+    dataType: 'json',
+    url: '../modules/owncloud_calendar_import/assets/updateCalendars.php',
+    success: function(data) {
+      console.log(data);
+      if(data && Array.isArray(data) && data.length > 0) {
+        build_calendar_info(data)
+      }
+    }
+  });
+}
+
+function build_calendar_info(data){
+  const content = data.map(calendar => {
+    const date = new Date(calendar.last_update*1000)
+    let status = date.toLocaleDateString() + " - "  + date.getHours() + ":" + date.getMinutes()
+    if(calendar.error) status = "Fehler:" + calendar.error;
+    return "<p><b>" + calendar.name + ":</b> <i>" + status + "</i></p>";
+  }).join('')
+  $('#oc_calendars').html(content);
+  window.setTimeout(fetch_calendars,60*1000);
 }
 
 $(document).ready(function () {

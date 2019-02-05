@@ -9,7 +9,7 @@ if($oc_calendars){
 	$calendars = json_decode($oc_calendars);
 	if(count($calendars) > 0){
 		
-		foreach($calendars as $calendar){
+		foreach($calendars as $index => $calendar){
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $calendar->url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -24,11 +24,18 @@ if($oc_calendars){
 			}
 			curl_close ($ch);
 
-			$cal_file = fopen($oc_folder . urlencode($calendar->name).".cal", "w");
-			fwrite($cal_file, $result);
-			fclose($cal_file);
+      //check if resource is calendar! 
+      $finfo = new finfo(FILEINFO_MIME_TYPE);
+      if($finfo->buffer($result) == "text/calendar"){
+        $cal_file = fopen($oc_folder . urlencode($calendar->name).".cal", "w");
+        fwrite($cal_file, $result);
+        fclose($cal_file);
+      } else {
+        $calendars[$index]->error =  "File is not a calendar";
+      }
+      $calendars[$index]->last_update = time();
 		}
 	} 
 }
 
-echo json_encode($oc_calendars);
+echo json_encode($calendars);
