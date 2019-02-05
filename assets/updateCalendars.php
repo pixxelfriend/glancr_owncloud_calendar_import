@@ -12,7 +12,7 @@ if($oc_calendars){
 		foreach($calendars as $index => $calendar){
       
       $update = false;
-      $filename = $oc_folder . urlencode($calendar->name).".cal";
+      $filename = $oc_folder . urlencode($calendar->key).".cal";
       
       //check if file should be updated
       if(file_exists($filename)) {

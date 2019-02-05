@@ -28,7 +28,8 @@ $(document).ready(function(){
 
 	form.on('submit',event => {
 		event.preventDefault()
-		const data = formCollect(form)
+    const data = formCollect(form)
+    if(data.key === "") data.key = data.name + "_" + Math.random().toString(36).replace('0.', '').substring(0,5)
 		const index = form.data('index') > -1 ? form.data('index') : oc_calendar_settings.calendars.length;
 		oc_calendar_settings.calendars[index] = data;
 		submitFormular()
@@ -43,7 +44,7 @@ function buildList(){
 	var list = oc_calendar_settings.calendars.map((calendar,index) => {
 		return `<li>
 					<b>${calendar.name} &#128472; ${calendar.interval}h</b>
-					<span>${oc_calendar_settings.baseUrl}${encodeURIComponent(calendar.name)}</span>
+					<span>${oc_calendar_settings.baseUrl}${calendar.key}</span>
 					<button class="oc_calendar__edit" data-index="${index}" type="button">
 						<span class="fi-pencil"></span>
 					</button>
@@ -61,7 +62,8 @@ function buildList(){
 		const i = $(this).data('index')
     const item = {...oc_calendar_settings.calendars[i]}
 		form.find("h4.edit").removeClass('hidden')
-		form.data('index',i);
+    form.data('index',i);
+    form.find('input[name="key"]').val(item.key)
 		form.find('input[name="name"]').val(item.name)
 		form.find('input[name="user"]').val(item.user)
 		form.find('input[name="password"]').val(item.password)
