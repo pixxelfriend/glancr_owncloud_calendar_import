@@ -33,6 +33,7 @@ $RECYCLE.BIN/
 *.msp
 
 *.txt
+*.cal
 # Windows shortcuts
 *.lnk
 
