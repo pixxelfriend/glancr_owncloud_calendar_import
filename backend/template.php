@@ -1,7 +1,6 @@
 
 <?php 
   $oc_calendars = getConfigValue('oc_calendars');
-  $calendars = json_decode($oc_calendars);
   $base_url =  "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_import/assets/getCalendar.php?key=";
 ?>
 

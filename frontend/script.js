@@ -3,7 +3,6 @@ function fetch_calendars() {
     dataType: 'json',
     url: '../modules/owncloud_calendar_import/assets/updateCalendars.php',
     success: function(data) {
-      console.log(data);
       if(data && Array.isArray(data) && data.length > 0) {
         build_calendar_info(data)
       }
