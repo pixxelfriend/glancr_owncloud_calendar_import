@@ -10,30 +10,53 @@ if($oc_calendars){
 	if(count($calendars) > 0){
 		
 		foreach($calendars as $index => $calendar){
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $calendar->url);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-			curl_setopt($ch, CURLOPT_USERPWD,  $calendar->user . ':' . $calendar->password);
-
-			$result = curl_exec($ch);
-
-			if (curl_errno($ch)) {
-				echo 'Error:' . curl_error($ch);
-			}
-			curl_close ($ch);
-
-      //check if resource is calendar! 
-      $finfo = new finfo(FILEINFO_MIME_TYPE);
-      if($finfo->buffer($result) == "text/calendar"){
-        $cal_file = fopen($oc_folder . urlencode($calendar->name).".cal", "w");
-        fwrite($cal_file, $result);
-        fclose($cal_file);
+      
+      $update = false;
+      $filename = $oc_folder . urlencode($calendar->name).".cal";
+      
+      //check if file should be updated
+      if(file_exists($filename)) {
+        $filetime = filemtime($filename);
+        if($filetime < time() - $calendar->interval*3600){
+          $update = true;
+        } else {
+          $calendars[$index]->last_update = $filetime;
+        }
       } else {
-        $calendars[$index]->error =  "File is not a calendar";
+        $update = true;
       }
-      $calendars[$index]->last_update = time();
+    
+      //fetch file from url
+      if($update){
+        $cal_file = fopen($filename, "w");
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $calendar->url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_USERPWD,  $calendar->user . ':' . $calendar->password);
+        
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+          $error = "Calendar could not be fetched";
+          #'Error:' . curl_error($ch);
+        }
+        curl_close ($ch);
+        //check if resource is calendar! 
+        if($result){
+          $finfo = new finfo(FILEINFO_MIME_TYPE);
+          if($finfo->buffer($result) == "text/calendar"){
+            //if yes, update file
+            fwrite($cal_file, $result);
+            fclose($cal_file);
+            $calendars[$index]->last_update = time();
+          } else {
+            $error = "File is not a calendar";
+          }
+        }
+      }
+      if($error) {
+        $calendars[$index]->error = $error;
+      }
 		}
 	} 
 }

@@ -14,7 +14,7 @@ function fetch_calendars() {
 function build_calendar_info(data){
   const content = data.map(calendar => {
     const date = new Date(calendar.last_update*1000)
-    let status = date.toLocaleDateString() + " - "  + date.getHours() + ":" + date.getMinutes()
+    let status = "&#128472; " +  date.toLocaleDateString() + " - "  + date.getHours() + ":" + date.getMinutes()
     if(calendar.error) status = "Fehler:" + calendar.error;
     return "<p><b>" + calendar.name + ":</b> <i>" + status + "</i></p>";
   }).join('')
