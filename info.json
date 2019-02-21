@@ -4,7 +4,7 @@
     "version": "0.9.1",
     "description": "Importiert Owncloud Kalender",
     "module_url": "https://github.com/pixxelfriend/glancr_owncloud_calendar_import",
-    "download_url": "https://github.com/pixxelfriend/glancr_owncloud_calendar_import/archive/master.zip",
+    "download_url": "https://github.com/pixxelfriend/glancr_owncloud_calendar_import/releases",
 	"category": "Persönliche Infos",
     "last_update": "21.02.2019"
   },
