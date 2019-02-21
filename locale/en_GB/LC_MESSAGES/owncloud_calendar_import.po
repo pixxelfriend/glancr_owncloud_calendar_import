@@ -1,41 +1,55 @@
-# mirr.OS v0.1.2.
-# Copyright (C) 2016
-# This file is distributed under the same license as the PACKAGE package.
-# mattes <ma@glancr.de>, 2016.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: mirr.OS v0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 10:20+0100\n"
-"PO-Revision-Date: 2019-01-15 21:51+0100\n"
-"Last-Translator: steffen <info@twolabs.de>\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-02-21 23:13+0100\n"
+"PO-Revision-Date: 2019-02-21 23:15+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 2.2.1\n"
-"Language: en_GB\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
 
-msgid "oc_importer_url"
-msgstr "Owncloud Calendar Url"
+#: backend/template.php:15 backend/template.php:20
+msgid "add_new_calendar"
+msgstr "Add a new calendar"
 
-msgid "oc_importer_username"
-msgstr "username"
+#: backend/template.php:21
+msgid "edit_calendar"
+msgstr "edit calendar"
 
-msgid "oc_importer_password"
-msgstr "password"
+#: backend/template.php:24
+msgid "title"
+msgstr "Title"
 
-msgid "oc_importer_name"
-msgstr "calendar name"
+#: backend/template.php:25
+msgid "username"
+msgstr "Username"
 
-msgid "owncloud_calendar_import_title"
-msgstr "OC Calendar"
+#: backend/template.php:26
+msgid "password"
+msgstr "Password"
 
-msgid "owncloud_calendar_import_description"
-msgstr "imports OwnCloud caldav calendar"
+#: backend/template.php:27
+msgid "calendar_url"
+msgstr "OwnCloud calendar URL"
 
+#: backend/template.php:28
+msgid "update_interval"
+msgstr "Update Interval"
+
+#: backend/template.php:39
 msgid "save"
-msgstr "save"
+msgstr "Save"
+
+#: backend/template.php:42
+msgid "abort"
+msgstr "Abort"
+
+#: frontend/template.php:1
+msgid "no_calendars_added"
+msgstr "No calendars added"
