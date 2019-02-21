@@ -1,0 +1,17 @@
+{
+  "module": {
+    "name": "owncloud_calendar_import",
+    "version": "0.1.0",
+    "description": "Importiert Owncloud Kalender",
+    "module_url": "https://www.glancr.de/profiles/__dev-username__/__modulname__",
+    "download_url": "https://www.glancr.de/profiles/__dev-username__/__modulname__/__modulname__.zip",
+	"category": "Pers\u00f6nliche Infos",
+    "last_update": ""
+  },
+  "creator": {
+    "name": "Steffen Hoffmann",
+    "contact": "steffen@twolabs.de",
+    "website": "https://www.twolabs.de",
+    "profile": "https://www.glancr.de/profiles/__dev-username__"
+  }
+}
