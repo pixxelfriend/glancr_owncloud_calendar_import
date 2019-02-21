@@ -1,7 +1,7 @@
 
 <?php 
   $oc_calendars = getConfigValue('oc_calendars');
-  $base_url =  "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_import/assets/getCalendar.php?key=";
+  $base_url = "http://" . $_SERVER["HTTP_HOST"] . "/modules/owncloud_calendar_import/assets/getCalendar.php?key=";
 ?>
 
 <script type="text/javascript">
@@ -12,20 +12,20 @@
 </script>
 
 <div class="oc_calendar_list">
-  <p>add a new calendar <a class="oc_calendar_import__add">here</a></p>
+  <p><?php echo _('add_new_calendar'); ?> <a class="oc_calendar_import__add">here</a></p>
   <ul id="oc_calendar_list"></ul>
 </div>
 
 <form id="oc_calendar_import">
-  <h4 class="add">ADD NEW CALENDAR</h4>
-  <h4 class="edit hidden">EDIT CALENDAR</h4>
+  <h4 class="add"><?php echo _('add_new_calendar'); ?></h4>
+  <h4 class="edit hidden"><?php echo _('edit_calendar'); ?></h4>
   <div class="oc_calendar_group">
     <input type="hidden" name="key" value="" />
-    <input type="text" name="name" class="oc_calendar_change" title="Bezeichnung" placeholder="Bezeichnung" required />
-    <input type="text" name="user" class="oc_calendar_change" title="Username" placeholder="Username" required />
-    <input type="password" name="password" class="oc_calendar_change" title="Passwort" placeholder="Passwort" required />
-    <input type="url" name="url" class="oc_calendar_change" title="Kalender URL" placeholder="https://example.com/remote.php/dav/calendars/username/CalendarName?export" required />
-    <select name="interval" title="Update intervall">
+    <input type="text" name="name" class="oc_calendar_change" title="Bezeichnung" placeholder="<?php echo _('title'); ?>" required />
+    <input type="text" name="user" class="oc_calendar_change" title="Username" placeholder="<?php echo _('username'); ?>" required />
+    <input type="password" name="password" class="oc_calendar_change" title="Passwort" placeholder="<?php echo _('password'); ?>" required />
+    <input type="url" name="url" class="oc_calendar_change" title="<?php echo _('calendar_url'); ?>" placeholder="https://example.com/remote.php/dav/calendars/username/CalendarName?export" required />
+    <select name="interval" title="<?php echo _('update_interval'); ?>">
       <option value="1">1 h</option>
       <option value="2">2 h</option>
       <option value="4">4 h</option>
