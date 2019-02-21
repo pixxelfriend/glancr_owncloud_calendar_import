@@ -1,17 +1,16 @@
 {
   "module": {
     "name": "owncloud_calendar_import",
-    "version": "0.1.0",
+    "version": "0.9.1",
     "description": "Importiert Owncloud Kalender",
-    "module_url": "https://www.glancr.de/profiles/__dev-username__/__modulname__",
-    "download_url": "https://www.glancr.de/profiles/__dev-username__/__modulname__/__modulname__.zip",
-	"category": "Pers\u00f6nliche Infos",
-    "last_update": ""
+    "module_url": "https://github.com/pixxelfriend/glancr_owncloud_calendar_import",
+    "download_url": "https://github.com/pixxelfriend/glancr_owncloud_calendar_import/archive/master.zip",
+	"category": "Persönliche Infos",
+    "last_update": "21.02.2019"
   },
   "creator": {
     "name": "Steffen Hoffmann",
     "contact": "steffen@twolabs.de",
-    "website": "https://www.twolabs.de",
-    "profile": "https://www.glancr.de/profiles/__dev-username__"
+    "website": "https://www.twolabs.de"
   }
 }
