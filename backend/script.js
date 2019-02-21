@@ -78,13 +78,11 @@ function buildList(){
   $('#oc_calendar_list .oc_calendar__delete').on('click',function() {
     const parent = $(this).parent()
     const key = $(this).data('key')
-    console.log(key);
     //ajax call to delete calendar
-  console.log(oc_calendar_settings.calendars.filter(e => e.key === key));
-  $.post('../modules/owncloud_calendar_import/assets/updateCalendars.php', {
+  $.post('../modules/owncloud_calendar_import/assets/updateCalendars.php',{
       'method' : 'delete',
-      'key' : oc_calendar_settings.calendars.filter(e => e.key === key)[0].key})
-    .done(function() {
+      'key' : oc_calendar_settings.calendars.filter(e => e.key === key)[0].key
+  }).done(function() {
       oc_calendar_settings.calendars = oc_calendar_settings.calendars.filter(cal => cal.key !== key)
       parent.fadeOut(500,function(){
                   submitFormular()
@@ -93,11 +91,8 @@ function buildList(){
               })
     })
   })
-
-
   $('.oc_calendar_list').show();
 }
-
 
 function submitFormular(){
   $.post('setConfigValueAjax.php', {
